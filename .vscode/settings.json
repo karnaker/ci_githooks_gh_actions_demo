@@ -1,0 +1,30 @@
+{
+    // Override settings for specific languages
+    "[javascript]": {
+        // Set Prettier as the default formatter for JavaScript
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+        // Set the tab size to 2 spaces for JavaScript files
+        "editor.tabSize": 2
+    },
+    "[typescript]": {
+        // Set Prettier as the default formatter for TypeScript
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        
+        // Set the tab size to 2 spaces for TypeScript files
+        "editor.tabSize": 2
+    },
+    "[python]": {
+        // Set the tab size to 4 spaces for Python files
+        "editor.tabSize": 4,
+        
+        // Configure the Python language server to use "Pylance" for enhanced Python support.
+        "python.languageServer": "Pylance"
+    },
+
+    // Configure which files and folders to exclude from the file explorer
+    "files.exclude": {
+        // Exclude the .git folder from being displayed in the file explorer
+        "**/.git": false
+    }
+}

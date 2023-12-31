@@ -1,0 +1,7 @@
+{
+    // List of extensions
+    "recommendations": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+    ]
+}
