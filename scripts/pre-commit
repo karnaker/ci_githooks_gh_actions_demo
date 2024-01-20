@@ -1,0 +1,76 @@
+#!/bin/sh
+
+# Print a starting message for the pre-commit hook
+echo "Starting pre-commit hook..."
+
+# Function to get the current time in seconds
+current_time() {
+    date +%s
+}
+
+# Function to calculate the duration of the script execution
+# Arguments:
+#   start_time: The start time of the script
+#   end_time: The end time of the script
+calculate_duration() {
+    local start_time="$1"
+    local end_time="$2"
+    echo "$(($end_time - $start_time)) seconds"
+}
+
+# Function to find the root directory of the Git repository
+find_git_root() {
+    git rev-parse --show-toplevel
+}
+
+# Function to run linting and fixing in a specified folder
+# Arguments:
+#   folder_path: The path to the folder where linting and fixing will be run
+lint_and_fix() {
+    local folder_path="$1"
+    cd "$folder_path" || exit 1
+    echo "Linting and fixing files in $folder_path..."
+    if ! npm run lint:fix; then
+        echo "Linting and fixing failed. Commit aborted."
+        exit 1
+    fi
+
+    # Add the fixed files to the staging area
+    git add .
+}
+
+# Function to run tests in a specified folder
+# Arguments:
+#   folder_path: The path to the folder where tests will be run
+run_tests() {
+    local folder_path="$1"
+    cd "$folder_path" || exit 1
+    echo "Running tests in $folder_path..."
+    if ! npm run test; then
+        echo "Testing failed. Commit aborted."
+        exit 1
+    fi
+}
+
+# Main execution flow
+main() {
+    local start_time=$(current_time)
+
+    local root_directory=$(find_git_root)
+    local target_folder="frontend/mobile/agapic_health_assistant_app"
+
+    # Check if any of the staged files are within the target folder
+    if git diff --name-only --cached | grep -qE "$target_folder/"; then
+        lint_and_fix "$root_directory/$target_folder"
+        run_tests "$root_directory/$target_folder"
+    fi
+
+    local end_time=$(current_time)
+    echo "Pre-commit hook execution time: $(calculate_duration "$start_time" "$end_time")"
+
+    # Continue with the commit
+    exit 0
+}
+
+# Call the main function
+main
