@@ -25,3 +25,6 @@ jobs:
       - name: Lint
         run: npm run lint
         working-directory: ./frontend/mobile/agapic_health_assistant_app
+        - name: Test
+          run: npm run test
+          working-directory: ./frontend/mobile/agapic_health_assistant_app
