@@ -30,6 +30,6 @@ jobs:
       - name: Test
         run: npm run test
         working-directory: ./frontend/mobile/agapic_health_assistant_app
-      - name: Build
+      - name: Assemble Android debug build
         run: ./gradlew assembleDebug
         working-directory: ./frontend/mobile/agapic_health_assistant_app/android
