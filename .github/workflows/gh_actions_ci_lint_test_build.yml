@@ -4,6 +4,8 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - 'frontend/mobile/agapic_health_assistant_app/**'
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
