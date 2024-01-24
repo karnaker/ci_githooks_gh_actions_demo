@@ -5,7 +5,7 @@ name: Continuous Integration for React Native Mobile App
 run-name: ${{ github.actor }} is running CI for React Native Mobile App
 
 # Trigger the workflow on pull requests to the main branch
-# and only if changes are made in the specified path!
+# and only if changes are made in the specified path
 on:
   pull_request:
     branches:
